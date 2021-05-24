@@ -3,6 +3,7 @@ from Crypto.PublicKey import RSA
 from Crypto.Signature import PKCS1_v1_5
 from BlockchainUtils import BlockchainUtils
 from Transaction import Transaction
+from Block import Block
 
 #The wallet class uses RSA key-pair generation to generate a unique set private-public key for the wallet object
 
@@ -38,4 +39,13 @@ class Wallet():
         transaction.sign(signature)
         return transaction
 
+    #if the node is the forger it will generate the next block using this method
+    def createBlock(self, transactions, previousHash, blockCount):
+        block = Block(transactions, previousHash, self.publicKeyString(), blockCount)
+        signature = self.sign(block.payload())
+        block.sign(signature)
+        return block
+
+
+        
 

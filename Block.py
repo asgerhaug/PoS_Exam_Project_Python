@@ -1,4 +1,5 @@
-import datetime
+import time
+import copy
 
 class Block:
 
@@ -7,7 +8,7 @@ class Block:
     self.previousHash = previousHash
     self.forger = forger
     self.blockCount = blockCount
-    self.timestamp = datetime.datetime.now()
+    self.timestamp = time.time()
     self.signature = ''
 
   def toJson(self):
@@ -22,5 +23,14 @@ class Block:
         jsonTransactions.append(transaction.toJson())
     data['transactions'] = jsonTransactions
     return data
+
+  def payload(self):
+    jsonRepresentation = copy.deepcopy(self.toJson())
+    jsonRepresentation['signature'] = ''
+    return jsonRepresentation
+
+  def sign(self, signature):
+    self.signature = signature
+    
 
 
