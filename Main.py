@@ -17,6 +17,9 @@ if __name__ == '__main__':
 
     node = Node(ip, port)
     node.startP2P()
+
+    if port == 10002:
+        node.p2p.connect_with_node('localhost', 10001)
     
 
     #print(coveredTransaction)
