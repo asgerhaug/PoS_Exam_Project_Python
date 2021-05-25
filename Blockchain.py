@@ -9,6 +9,7 @@ class Blockchain():
         self.accountModel = AccountModel()
 
     def addBlock(self, block):
+        self.executeTransactions(block.transactions)
         self.blocks.append(block)
     
     def toJson(self):
@@ -49,7 +50,17 @@ class Blockchain():
             return True
         else:
             return False
-        
-    
+
+    def executeTransactions(self, transactions):
+        for transaction in transactions:
+            self.executeTransaction(transaction)
+
+    #This method executes invidual transactions within the accountModel object    
+    def executeTransaction(self, transaction):
+        sender = transaction.senderPublicKey
+        receiver = transaction.receiverPublicKey
+        amount = transaction.amount
+        self.accountModel.updateBalance(sender, -amount)
+        self.accountModel.updateBalance(receiver, amount)
 
 
