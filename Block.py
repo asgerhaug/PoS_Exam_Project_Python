@@ -11,6 +11,12 @@ class Block:
     self.timestamp = time.time()
     self.signature = ''
 
+  @staticmethod
+  def genesis():
+      gensisBlock = Block([],'gensisHash', 'genesis', 0)
+      gensisBlock.timestamp = 0
+      return gensisBlock
+  
   def toJson(self):
     data = {}
     data['previousHash'] = self.previousHash

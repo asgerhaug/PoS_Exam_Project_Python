@@ -3,40 +3,36 @@ from Transaction import Transaction
 from Wallet import Wallet
 from TransactionPool import TransactionPool
 from Block import Block
+from Blockchain import Blockchain
+from BlockchainUtils import BlockchainUtils
 import pprint
 
 if __name__ == '__main__':
-    sender = 'sender'
-    receiver = 'receiver'
-    amount = 1
-    type = 'TRANSFER'
     
-    
-wallet = Wallet()
-fakewallet = Wallet()
-pool = TransactionPool()
+    blockchain = Blockchain()
+    pool = TransactionPool()
+
+    alice = Wallet()
+    bob = Wallet()
+    exchange = Wallet()
+
+    exchangeTransaction = exchange.createTransaction(alice.publicKeyString(), 10,'EXCHANGE')
+
+    if not pool.transactionExists(exchangeTransaction):
+        pool.addTransaction(exchangeTransaction)
+
+    transaction = alice.createTransaction(bob.publicKeyString(), 5, 'TRANSFER')
+
+    if not pool.transactionExists(transaction):
+        pool.addTransaction(transaction)
+
+    coveredTransaction = blockchain.getCoveredTransactionSet(pool.transactions)
+
+    print(coveredTransaction)
 
 
-transaction = wallet.createTransaction(receiver, amount, type)
-#print(transaction.playload())
 
-#signatureValid = Wallet.siganatureValid(
-#    transaction.playload(), transaction.signature, wallet.publicKeyString())
- #   transaction.playload(), transaction.signature, fakewallet.publicKeyString())##
 
-# print(signatureValid)
 
-if pool.transactionExists(transaction) == False:
-    pool.addTransaction(transaction)
 
-#block = Block(pool.transactions, 'previousHash', 'forger', 1)
-
-#print(block.toJson())
-
-block = wallet.createBlock(pool.transactions,'previousHash', 1)
-#print(block.toJson())
-pprint.pprint(block.toJson())
-
-signatureValid = Wallet.siganatureValid(block.payload(), block.signature, wallet.publicKeyString())
-print(signatureValid)
 
