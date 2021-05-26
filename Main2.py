@@ -17,8 +17,8 @@ if __name__ == '__main__':
     #port = int(sys.argv[2])
     #apiPort = int(sys.argv[3])
     ip='localhost'
-    port=10001
-    apiPort=5000
+    port=10002
+    apiPort=5001
 
 
     node = Node(ip, port)

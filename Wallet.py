@@ -35,7 +35,7 @@ class Wallet():
 
     def createTransaction(self, receiver, amount, type):
         transaction = Transaction(self.publicKeyString(), receiver, amount, type)
-        signature = self.sign(transaction.playload())
+        signature = self.sign(transaction.payload())
         transaction.sign(signature)
         return transaction
 

@@ -32,8 +32,8 @@ class Transaction:
     def sign(self, signature):
         self.signature = signature
     
-    #generates a deep copy of the original object, but sets the signature string to '', such taht we can validate it eve after signing it 
-    def playload(self):
+    #generates a deep copy of the original object, but sets the signature string to '', such that we can validate it even after signing it 
+    def payload(self):
         jsonRepresentation = copy.deepcopy(self.toJson())
         jsonRepresentation['signature'] = ''
         return jsonRepresentation
