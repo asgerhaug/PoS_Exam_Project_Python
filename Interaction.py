@@ -1,9 +1,15 @@
 from Wallet import Wallet
 from BlockchainUtils import BlockchainUtils
 import requests
+from ProofOfStake import ProofOfStake
+from Lot import Lot
 
 
 if __name__ == '__main__':
+
+    #lot = Lot('bob', 1, 'lastHash')
+    #print(lot.lotHash())
+
     bob =  Wallet()
     alice = Wallet()
     exchange = Wallet()

@@ -20,7 +20,7 @@ class Node():
     # This methods allows us to start up the connection of the node after instantiating it, which can be handy. 
     def startP2P(self):
         self.p2p = SocketCommunication(self.ip, self.port)
-        self.p2p.startSocketCommunication(self)
+        self.p2p.startSocketCommunication(self) #we inject a node object into SocketCommunication instances
 
     def startAPI(self, apiPort):
         self.api = NodeAPI()
@@ -33,15 +33,9 @@ class Node():
         data = transaction.payload()
         signatureValid = Wallet.siganatureValid(data, signature, signerPublicKey)
         transactionExist = self.transactionPool.transactionExists(transaction)
-        if not transactionExist:
+        if not transactionExist and signatureValid:
             self.transactionPool.addTransaction(transaction)
-
-
-
-
-#        if not transactionExists and signatureValid:
- #           self.transactionPool.addTransaction(transaction)
-  #          message = Message(self.p2p.socketConnector, 'TRANSACTION', transaction)
-   #         encodedMessage = BlockchainUtils.encode(message)
-    #        self.p2p.broadcast(encodedMessage)
+            message = Message(self.p2p.socketConnector, 'TRANSACTION', transaction)
+            encodedMessage = BlockchainUtils.encode(message)
+            self.p2p.broadcast(encodedMessage)
     

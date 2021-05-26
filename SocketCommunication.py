@@ -35,7 +35,7 @@ class SocketCommunication(Node):
         #print('outbound connection')
         #self.send_to_node(connected_node, 'Hi I am the node who initialized the connection')
 
-    #when you get an incomming message from a node, this method is called
+    #when you get an incomming message from a node, this method is called, when transactions are issued, the node calls the handleTransactionMethod
     def node_message(self, connected_node, message):
         message = BlockchainUtils.decode(json.dumps(message))
         if message.messageType == 'DISCOVERY':
@@ -43,6 +43,7 @@ class SocketCommunication(Node):
         elif message.messageType == 'TRANSACTION':
             transaction = message.data
             self.node.handleTransaction(transaction)
+        
         
 
     def send(self, receiver, message):
