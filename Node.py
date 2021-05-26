@@ -18,6 +18,9 @@ class Node():
         self.p2p = SocketCommunication(self.ip, self.port)
         self.p2p.startSocketCommunication()
 
+ #   def startAPI(self, apiPort):
+#        self.api = NodeApi
+
 
 
     
