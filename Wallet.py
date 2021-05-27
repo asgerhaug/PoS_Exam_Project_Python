@@ -22,13 +22,13 @@ class Wallet():
     #Signature creation
     def sign(self, data):
         dataHash = BlockchainUtils.hash(data)
-        SignatureSchemeObject = PKCS1_v1_5.new(self.keyPair)
-        Signature = SignatureSchemeObject.sign(dataHash)
-        return Signature.hex()
+        signatureSchemeObject = PKCS1_v1_5.new(self.keyPair)
+        signature = signatureSchemeObject.sign(dataHash)
+        return signature.hex()
 
     #it makes sense to validate signatures without needing to create an object
     @staticmethod
-    def siganatureValid(data, signature, publicKeyString):
+    def signatureValid(data, signature, publicKeyString):
         signature = bytes.fromhex(signature)
         dataHash = BlockchainUtils.hash(data)
         publicKey = RSA.importKey(publicKeyString)

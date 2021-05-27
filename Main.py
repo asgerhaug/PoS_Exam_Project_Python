@@ -24,7 +24,7 @@ if __name__ == '__main__':
     ip='localhost'
     port=10001
     apiPort=5000
-    keyFile = 'keys/publicKey.pem'
+    keyFile = 'keys/privateKey.pem'
 
 
 

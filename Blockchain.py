@@ -78,4 +78,18 @@ class Blockchain():
         nextForger = self.pos.forger(previousBlockHash)
         return nextForger
 
+    def createBlock(self, transactionFromPool, forgerWallet):
+        coveredTransactions = self.getCoveredTransactionSet(transactionFromPool)
+        self.executeTransactions(coveredTransactions)
+        previousBlockHash = BlockchainUtils.hash(self.blocks[-1].payload()).hexdigest()
+        blockcount = len(self.blocks)
+        newBlock = forgerWallet.createBlock(coveredTransactions, previousBlockHash, blockcount)
+        self.blocks.append(newBlock) #this only appends to the node (forger)'s local version of the blockchain
+        return newBlock # the returned node is yet to be broadcastet by the node
 
+    def transactionExist(self, transaction):
+        for block in self.blocks:
+            for blockTransaction in block.transactions:
+                if transaction.equals(blockTransaction):
+                    return True
+        return False

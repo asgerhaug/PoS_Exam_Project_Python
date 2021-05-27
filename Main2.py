@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
     #ip='localhost'
     #port=10002
-    #apiPort=5001
+    #apiPort=5002
 
 
     node = Node(ip, port, keyFile)
