@@ -93,3 +93,21 @@ class Blockchain():
                 if transaction.equals(blockTransaction):
                     return True
         return False
+    
+    def forverValid(self, block):
+        forgerPublicKey = self.pos.forger(block.previousHash)
+        proposedBlockForger = block.forger
+
+        if forgerPublicKey == proposedBlockForger:
+            return True
+        else:
+            return False
+
+    # we are using a kind of "Checksum" that both transactionslists are equally long, such we assume that the Forger, did not insert a fake transaction
+    def transactionsValid(self, transactions): # probably does not really guarentee any security in relation to malicius forger
+        coveredTransactions = self.getCoveredTransactionSet(transactions)
+        if len(coveredTransactions) == len(transactions):
+            return True
+        else:
+            return False
+    
