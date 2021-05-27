@@ -12,6 +12,13 @@ class Wallet():
     def __init__(self):
         self.keyPair = RSA.generate(2048)
 
+    #we will use this method to hardcode a genesis staker, to avoid the chicken & the egg problem with the PoS and Lots class.
+    def fromKey(self, file):
+        key = ''
+        with open(file, 'r') as keyfile:
+            key = RSA.importKey(keyfile.read())
+        self.keyPair = key
+
     #Signature creation
     def sign(self, data):
         dataHash = BlockchainUtils.hash(data)

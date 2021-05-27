@@ -16,12 +16,19 @@ if __name__ == '__main__':
     #ip = sys.argv[1]
     #port = int(sys.argv[2])
     #apiPort = int(sys.argv[3])
+    #keyFile = None
+    #if len(sys.argv) > 4:
+    #    keyFile = sys.argv[4]
+
+
     ip='localhost'
     port=10001
     apiPort=5000
+    keyFile = 'keys/publicKey.pem'
 
 
-    node = Node(ip, port)
+
+    node = Node(ip, port, keyFile)
     node.startP2P()
     node.startAPI(apiPort)
 

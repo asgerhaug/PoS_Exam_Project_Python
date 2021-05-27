@@ -30,6 +30,13 @@ class TransactionPool():
             if insert == True:
                 filterPoolTransactions.append(poolTransaction)
         self.transactions = filterPoolTransactions
+    
+    #if the threshold lenght of transactionslist is reached in the pool, we initiate a forger to create the next block
+    def forgerNeed(self):
+        if len(self.transactions) >= 1:
+            return True
+        else:
+            return False
 
             
     

@@ -6,7 +6,13 @@ class ProofOfStake():
 
     def __init__(self):
         self.stakers = {} #holds a dictionary of the peers publicKey as primary key and their stake as the mapped value.
+        self.setGenesisNodeStake()
     
+    #if there is no staker, then no forger, no forger, then no block, no block, then no transaction, no transactions, then no staker
+    def setGenesisNodeStake(self):
+        genesisPublicKey = open('keys/publicKey.pem', 'r').read()
+        self.stakers[genesisPublicKey] = 10
+        #self.stakers = self.update(genesisPublicKey, 1)
     
     def update(self, publicKeyString, stake):
         if publicKeyString in self.stakers.keys():

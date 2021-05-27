@@ -14,7 +14,7 @@ class SocketCommunication(Node):
     
     #this method aids the network by creating a node instance, which is always online as the first node, which peers can connect to
     def connectoToFirstNode(self):
-        if self.socketConnector.port != 10001: #hardcoded port choice of first node
+        if self.socketConnector.port != 10001: #hardcoded port choice of first node - like a genesis node...
             self.connect_with_node('localhost',10001)# So if am not the first node (port 10001), then i connect to the 10001 socket node.
 
     def startSocketCommunication(self, node):
